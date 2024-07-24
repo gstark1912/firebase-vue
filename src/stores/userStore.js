@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from '../configs/firebase'
+import { useDatabaseStore } from './database';
 
 export const useUserStore = defineStore('user', () => {
     // State
@@ -47,12 +48,14 @@ export const useUserStore = defineStore('user', () => {
     }
 
     const logOut = async () => {
+        const databaseStore = useDatabaseStore();
         await signOut(auth)
             .then()
             .catch((error) => {
                 console.log(error);
             });
         userData.value = null;
+        databaseStore.reset();
     }
 
     const currentUser = () => {
@@ -63,7 +66,9 @@ export const useUserStore = defineStore('user', () => {
                         userData.value = user;
                     }
                     else {
+                        const databaseStore = useDatabaseStore();
                         userData.value = null;
+                        databaseStore.reset();
                     }
                     resolve(user);
                     unsubscribe();

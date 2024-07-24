@@ -3,6 +3,7 @@ import HomeView from "./views/HomeView.vue";
 import LoginView from "./views/LoginView.vue";
 import RegisterView from "./views/RegisterView.vue";
 import { useUserStore } from "./stores/userStore";
+import EditarView from "./views/EditarView.vue";
 
 const requireAuth = async (to, from, next) => {
     const useStore = useUserStore();
@@ -29,6 +30,11 @@ var routes = [
     {
         path: '/register',
         component: RegisterView
+    },
+    {
+        path: '/edit/:id',
+        component: EditarView,
+        beforeEnter: requireAuth
     }
 ];
 
