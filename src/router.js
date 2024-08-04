@@ -21,20 +21,24 @@ var routes = [
     {
         path: '/',
         component: HomeView,
-        beforeEnter: requireAuth
+        beforeEnter: requireAuth,
+        name: 'home'
     },
     {
         path: '/login',
-        component: LoginView
+        component: LoginView,
+        name: 'login'
     },
     {
         path: '/register',
-        component: RegisterView
+        component: RegisterView,
+        name: 'register'
     },
     {
         path: '/edit/:id',
         component: EditarView,
-        beforeEnter: requireAuth
+        beforeEnter: requireAuth,
+        name: 'editar'
     }
 ];
 

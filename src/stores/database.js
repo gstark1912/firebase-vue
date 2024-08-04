@@ -9,6 +9,7 @@ export const useDatabaseStore = defineStore('database', () => {
 
     const documents = ref([]);
     const loadingDoc = ref(false);
+    const loading = ref(false);
 
     const getUrls = async () => {
         if (documents.value.length !== 0)
@@ -39,6 +40,7 @@ export const useDatabaseStore = defineStore('database', () => {
     }
 
     const addUrl = async (name) => {
+        loading.value = true;
         try {
             const obj = {
                 name,
@@ -51,6 +53,7 @@ export const useDatabaseStore = defineStore('database', () => {
             console.log(error);
         } finally {
             documents.value = [];
+            loading.value = false;
             getUrls();
         }
     }
@@ -92,6 +95,8 @@ export const useDatabaseStore = defineStore('database', () => {
 
     return {
         documents,
+        loading,
+        loadingDoc,
         reset,
         getUrls,
         addUrl,

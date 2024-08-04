@@ -23,6 +23,7 @@ export const useUserStore = defineStore('user', () => {
         }
         catch (error) {
             console.log(error);
+            return error.code;
         }
         finally {
             loadingUser.value = false;
@@ -41,6 +42,7 @@ export const useUserStore = defineStore('user', () => {
         }
         catch (error) {
             console.log(error);
+            return error.code;
         }
         finally {
             loadingUser.value = false;
